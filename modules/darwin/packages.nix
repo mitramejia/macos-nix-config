@@ -1,0 +1,15 @@
+{pkgs}:
+with pkgs; let
+  shared-packages = import ../shared/packages.nix {inherit pkgs;};
+in
+  shared-packages
+  ++ [
+    dockutil
+    cocoapods
+    fastlane
+    (nerdfonts.override {
+      fonts = [
+        "JetBrainsMono"
+      ];
+    })
+  ]
