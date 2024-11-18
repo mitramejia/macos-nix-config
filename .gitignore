@@ -1,0 +1,34 @@
+
+# macOS specific files
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+._*
+
+# Node.js related files
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# JetBrains IDE specific files (For IntelliJ, WebStorm, etc.)
+.idea/
+
+# Vim/Emacs temporary files
+*~
+.*.swp
+.*.swo
+
+# Logs
+logs
+*.log
+
+# Skip build output
+dist/
+build/
+coverage/
+
+# Ignore Nix environment files
+.nix-*
+result/
