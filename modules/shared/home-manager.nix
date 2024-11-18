@@ -285,11 +285,11 @@ in {
         identityFile = [
           (
             lib.mkIf pkgs.stdenv.hostPlatform.isLinux
-            "/home/${user}/.ssh/id_github"
+            "/home/${user}/.ssh/github_id"
           )
           (
             lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-            "/Users/${user}/.ssh/id_github"
+            "/Users/${user}/.ssh/github_id"
           )
         ];
       };
