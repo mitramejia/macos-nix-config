@@ -2,7 +2,11 @@
   pkgs,
   lib,
   ...
-}: {
+}: let
+	#  TODO: Make it configurable, maybe use nix template
+  name = "Mitra Mejia	";
+  email = "mitra.mejia@gmail.com";
+in {
   direnv = {
     enable = true;
     enableZshIntegration = true;
@@ -79,6 +83,8 @@
   git = {
     enable = true;
     ignores = ["*.swp"];
+    userName = name;
+    userEmail = email;
     lfs = {
       enable = true;
     };
@@ -291,7 +297,7 @@
 
   tmux = {
     enable = true;
-    shell = "${pkgs.zsh}/bin/zsh";
+    shell = "~/.nix-profile/bin/zsh";
     plugins = with pkgs.tmuxPlugins; [
       vim-tmux-navigator
       sensible
