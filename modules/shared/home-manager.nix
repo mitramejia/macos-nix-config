@@ -1,13 +1,8 @@
 {
-  config,
   pkgs,
   lib,
   ...
-}: let
-  name = "Mitra Mejia	";
-  user = "mitra";
-  email = "mitra.mejia@gmail.com";
-in {
+}: {
   direnv = {
     enable = true;
     enableZshIntegration = true;
@@ -84,8 +79,6 @@ in {
   git = {
     enable = true;
     ignores = ["*.swp"];
-    userName = name;
-    userEmail = email;
     lfs = {
       enable = true;
     };
@@ -272,11 +265,11 @@ in {
     includes = [
       (
         lib.mkIf pkgs.stdenv.hostPlatform.isLinux
-        "/home/${user}/.ssh/config_external"
+        "~/.ssh/config_external"
       )
       (
         lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-        "/Users/${user}/.ssh/config_external"
+        "~/.ssh/config_external"
       )
     ];
     matchBlocks = {
@@ -285,11 +278,11 @@ in {
         identityFile = [
           (
             lib.mkIf pkgs.stdenv.hostPlatform.isLinux
-            "/home/${user}/.ssh/github_id"
+            "~/.ssh/github_id"
           )
           (
             lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-            "/Users/${user}/.ssh/github_id"
+            "~/.ssh/github_id"
           )
         ];
       };
