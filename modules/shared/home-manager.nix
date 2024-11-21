@@ -3,7 +3,7 @@
   lib,
   ...
 }: let
-	#  TODO: Make it configurable, maybe use nix template
+  #  TODO: Make it configurable, maybe use nix template
   name = "Mitra Mejia	";
   email = "mitra.mejia@gmail.com";
 in {
@@ -94,7 +94,7 @@ in {
         editor = "vim";
         autocrlf = "input";
       };
-      commit.gpgsign = true;
+      commit.gpgsign = false;
       pull.rebase = false;
     };
   };
