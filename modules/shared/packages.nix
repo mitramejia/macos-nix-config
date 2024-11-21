@@ -29,6 +29,8 @@ with pkgs; [
   alejandra
   android-tools
   openjdk
+  just
+  actionlint
 
   # Encryption and security tools
   _1password-cli
@@ -64,6 +66,7 @@ with pkgs; [
   nodePackages.live-server
   nodePackages.nodemon
   nodePackages.eas-cli
+  nodePackages.jsonlint # Linter for github workflow configuration files, ie: .env-cmdrc.json
 
   # Source code management, Git, GitHub tools
   gh
