@@ -73,7 +73,10 @@ in {
     {path = "/Applications/Music.app/";}
     {path = "/Applications/Photos.app/";}
     {path = "/Applications/Safari.app/";}
-    {path = "/Applications/Cursor.app/";}
+    {path = "/Applications/Arro\ Staging.app/";}
+    {path = "/Applications/Arro\ Beta.app/";}
+    {path = "/Applications/Arro.app/";}
+    {path = "/Applications/iPhone\ Mirroring.app/";}
     {path = "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/";}
     {
       path = "/Applications";
