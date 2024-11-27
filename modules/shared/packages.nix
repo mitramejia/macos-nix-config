@@ -6,7 +6,6 @@ with pkgs; [
   act
   aspell
   aspellDicts.en
-  bash-completion
   bat
   btop
   coreutils
@@ -31,6 +30,7 @@ with pkgs; [
   openjdk
   just
   actionlint
+  nh
 
   # Encryption and security tools
   _1password-cli
@@ -84,6 +84,6 @@ with pkgs; [
 
   # Python packages
   black
-  python39
-  python39Packages.virtualenv
+  python3
+  python3Packages.virtualenv
 ]
