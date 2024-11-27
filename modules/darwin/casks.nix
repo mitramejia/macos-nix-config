@@ -20,11 +20,13 @@ _: [
   "syncthing"
   "obsidian"
 
+
   # Productivity Tools
   "raycast"
 
   # Browsers
   "google-chrome"
+  "firefox"
 
   # AI
   "diffusionbee"
