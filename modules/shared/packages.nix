@@ -40,8 +40,6 @@ with pkgs; [
   sops
 
   # Cloud-related tools and SDKs
-  docker
-  docker-compose
   flyctl
 
   go
@@ -60,17 +58,13 @@ with pkgs; [
   glow
   jpegoptim
   pngquant
+  eza
 
   # Node.js development tools
   fzf
-  nodePackages.live-server
-  nodePackages.nodemon
-  nodePackages.eas-cli
-  nodePackages.jsonlint # Linter for github workflow configuration files, ie: .env-cmdrc.json
 
   # Source code management, Git, GitHub tools
   gh
-
   # Text and terminal utilities
   htop
   hunspell
