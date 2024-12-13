@@ -7,9 +7,4 @@ in
     dockutil
     cocoapods
     fastlane
-    (nerdfonts.override {
-      fonts = [
-        "JetBrainsMono"
-      ];
-    })
   ]
