@@ -13,13 +13,53 @@ in {
     nix-direnv.enable = true;
   };
 
+  fzf = {
+    enable = true;
+    defaultOptions = ["--color 16"];
+    enableZshIntegration = true;
+  };
+
+  kitty = {
+    enable = true;
+    package = pkgs.kitty;
+    shellIntegration.enableZshIntegration = true;
+    settings = {
+      scrollback_lines = 2000;
+      wheel_scroll_min_lines = 1;
+      window_padding_width = 4;
+      confirm_os_window_close = 0;
+    };
+    themeFile = "Catppuccin-Mocha";
+    extraConfig = ''
+      tab_bar_style fade
+      tab_fade 1
+      font_size 12.0
+      active_tab_font_style   bold
+      inactive_tab_font_style bold
+    '';
+  };
+
+  starship = {
+    enable = true;
+    package = pkgs.starship;
+  };
+
   zsh = {
     enable = true;
-    enableCompletion = true;
+    enableCompletion = false;
     syntaxHighlighting.enable = true;
     autosuggestion.enable = true;
     autocd = true;
     cdpath = ["~/.local/share/src"];
+
+    oh-my-zsh = {
+      enable = true;
+      plugins = ["node" "git" "aws" "z" "vi-mode" "aliases" "tmux"];
+      theme = ""; # disable theme to allow nix/home-manager starship to control prompt
+      extraConfig = ''
+        ZSH_TMUX_AUTOSTART=true
+      '';
+    };
     initExtraFirst = ''
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
@@ -39,52 +79,88 @@ in {
       export ANDROID_HOME=$HOME/Library/Android/sdk
 
       export PNPM_HOME=~/.pnpm-packages
-      alias p=pnpm
-      alias px=pnpx
+
 
       # Remove history data we don't want to see
       export HISTIGNORE="pwd:ls:cd"
 
-      # Ripgrep alias
-      alias search='rg -p --glob "!node_modules/*" --glob "!vendor/*" "$@"'
 
       # Vim is my editor
       export ALTERNATE_EDITOR=""
       export EDITOR="vim"
 
-      alias watch="tmux new-session -d -s watch-session 'zsh ./bin/watch.sh'"
-      alias unwatch='tmux kill-session -t watch-session'
-
-      # Use difftastic, syntax-aware diffing
-      alias diff=difft
-
-      alias gp='git push'
-      alias gplo='git pull origin'
-
-      # Always color ls and group directories
-      alias ls='ls --color=auto'
-
     '';
     initExtra = ''
       [ -s "/Users/mitramejia/.scm_breeze/scm_breeze.sh" ] && source "/Users/mitramejia/.scm_breeze/scm_breeze.sh"
     '';
-    oh-my-zsh = {
-      enable = true;
-      plugins = ["git" "aws" "z" "nvm" "macos" "node" "vi-mode"];
-      theme = "";
+    shellAliases = {
+      v = "lvim";
+      cat = "bat";
+      ls = "eza --icons";
+      ll = "eza -lh --icons --grid --group-directories-first";
+      la = "eza -lah --icons --grid --group-directories-first";
+      ".." = "cd ..";
+      gp = "git push origin";
+      gash = "git stash";
+      gasha = "git stash apply";
+      gplo = "git pull origin";
+      open-pr = "gh pr create";
+      p = "pnpm";
+      vim = "lvim";
     };
   };
 
-  fzf = {
+  tmux = {
     enable = true;
-    defaultOptions = ["--color 16"];
-    enableZshIntegration = true;
-  };
+    shell = "${pkgs.zsh}/bin/zsh";
+    historyLimit = 1000000;
+    terminal = "tmux-256color";
+    keyMode = "vi";
+    newSession = true;
+    mouse = true;
+    baseIndex = 1;
+    disableConfirmationPrompt = true;
+    prefix = "C-Space";
+    extraConfig = ''
+      set -gu default-command
+      set -g default-shell "$SHELL"
+      set -g pane-base-index 1
+      set-window-option -g pane-base-index 1
 
-  starship = {
-    enable = true;
-    enableZshIntegration = true;
-    package = pkgs.starship;
+      # keybindings
+      bind-key -T copy-mode-vi v send-keys -X begin-selection
+      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+      bind - split-window -v -c "#{pane_current_path}"
+      bind | split-window -h -c "#{pane_current_path}"
+
+      bind h select-pane -L
+      bind j select-pane -D
+      bind k select-pane -U
+      bind l select-pane -R
+    '';
+
+    plugins = with pkgs; [
+      {
+        plugin = tmuxPlugins.catppuccin;
+        extraConfig = ''
+          set -g @catppuccin_flavour 'mocha'
+          set -g @catppuccin_window_tabs_enabled on
+          set -g @catppuccin_date_time "%H:%M"
+        '';
+      }
+      {
+        plugin = tmuxPlugins.continuum;
+        extraConfig = ''
+          set -g @continuum-restore 'on'
+          set -g @continuum-boot 'on'
+          set -g @continuum-save-interval '10'
+        '';
+      }
+      tmuxPlugins.better-mouse-mode
+      tmuxPlugins.yank
+    ];
   };
 
   git = {
@@ -216,63 +292,6 @@ in {
     '';
   };
 
-  alacritty = {
-    enable = true;
-    settings = {
-      cursor = {
-        style = "Block";
-      };
-
-      window = {
-        opacity = 1.0;
-        padding = {
-          x = 24;
-          y = 24;
-        };
-      };
-
-      font = {
-        normal = {
-          family = "JetBrainsMono Nerd Font";
-          style = "Regular";
-        };
-        size = lib.mkMerge [
-          (lib.mkIf pkgs.stdenv.hostPlatform.isLinux 10)
-          (lib.mkIf pkgs.stdenv.hostPlatform.isDarwin 14)
-        ];
-      };
-
-      colors = {
-        primary = {
-          background = "0x1f2528";
-          foreground = "0xc0c5ce";
-        };
-
-        normal = {
-          black = "0x1f2528";
-          red = "0xec5f67";
-          green = "0x99c794";
-          yellow = "0xfac863";
-          blue = "0x6699cc";
-          magenta = "0xc594c5";
-          cyan = "0x5fb3b3";
-          white = "0xc0c5ce";
-        };
-
-        bright = {
-          black = "0x65737e";
-          red = "0xec5f67";
-          green = "0x99c794";
-          yellow = "0xfac863";
-          blue = "0x6699cc";
-          magenta = "0xc594c5";
-          cyan = "0x5fb3b3";
-          white = "0xd8dee9";
-        };
-      };
-    };
-  };
-
   ssh = {
     enable = true;
     includes = [
@@ -300,56 +319,5 @@ in {
         ];
       };
     };
-  };
-
-  tmux = {
-    enable = true;
-    shell = "${pkgs.zsh}/bin/zsh";
-    historyLimit = 1000000;
-    terminal = "tmux-256color";
-    keyMode = "vi";
-    newSession = true;
-    mouse = true;
-    baseIndex = 1;
-    disableConfirmationPrompt = true;
-    prefix = "C-Space";
-    extraConfig = ''
-      set -g pane-base-index 1
-      set-window-option -g pane-base-index 1
-
-      # keybindings
-      bind-key -T copy-mode-vi v send-keys -X begin-selection
-      bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-      bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-
-      bind - split-window -v -c "#{pane_current_path}"
-      bind | split-window -h -c "#{pane_current_path}"
-
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
-    '';
-
-    plugins = with pkgs; [
-      {
-        plugin = tmuxPlugins.catppuccin;
-        extraConfig = ''
-          set -g @catppuccin_flavour 'mocha'
-          set -g @catppuccin_window_tabs_enabled on
-          set -g @catppuccin_date_time "%H:%M"
-        '';
-      }
-      {
-        plugin = tmuxPlugins.continuum;
-        extraConfig = ''
-          set -g @continuum-restore 'on'
-          set -g @continuum-boot 'on'
-          set -g @continuum-save-interval '10'
-        '';
-      }
-      tmuxPlugins.better-mouse-mode
-      tmuxPlugins.yank
-    ];
   };
 }
