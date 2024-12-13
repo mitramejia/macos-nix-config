@@ -1,25 +1,20 @@
 _: [
   # Development Tools
-  "homebrew/cask/docker"
+  #  "homebrew/cask/docker"
+
   "insomnia"
   "tableplus"
-  "ngrok"
-  "cursor"
+  "visual-studio-code"
   "jetbrains-toolbox"
-  "lm-studio"
-  "arc"
+  "figma"
 
   # Communication Tools
   "loom"
-  "slack"
-  "zoom"
+  #  "slack"
   "whatsapp"
 
   # Utility Tools
-  "appcleaner"
-  "syncthing"
   "obsidian"
-
 
   # Productivity Tools
   "raycast"
@@ -27,7 +22,4 @@ _: [
   # Browsers
   "google-chrome"
   "firefox"
-
-  # AI
-  "diffusionbee"
 ]
