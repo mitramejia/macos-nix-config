@@ -132,13 +132,16 @@ in {
       bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
       bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
-      bind - split-window -v -c "#{pane_current_path}"
-      bind | split-window -h -c "#{pane_current_path}"
+      unbind -
+      unbind |
 
-      bind h select-pane -L
-      bind j select-pane -D
-      bind k select-pane -U
-      bind l select-pane -R
+      bind-key - split-window -v -c "#{pane_current_path}"
+      bind-key | split-window -h -c "#{pane_current_path}"
+
+      bind-key h select-pane -L
+      bind-key j select-pane -D
+      bind-key k select-pane -U
+      bind-key l select-pane -R
     '';
 
     plugins = with pkgs; [
