@@ -7,4 +7,5 @@ in
     dockutil
     cocoapods
     fastlane
+    nerd-fonts.jetbrains-mono
   ]
