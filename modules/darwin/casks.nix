@@ -1,6 +1,6 @@
 _: [
   # Development Tools
-  #  "homebrew/cask/docker"
+  "homebrew/cask/docker"
 
   "insomnia"
   "tableplus"
