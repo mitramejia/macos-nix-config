@@ -1,48 +1,24 @@
 {pkgs, ...}:
 with pkgs; [
+  # Development environments and IDEs
   devenv
-
-  # General packages for development and system management
-  act
-  aspell
-  aspellDicts.en
-  bat
-  btop
-  coreutils
-  difftastic
-  du-dust
-  gcc
-  git-filter-repo
-  killall
-  neofetch
-  openssh
-  pandoc
-  docker-compose
-  sqlite
-  ruby
-  pnpm
-  wget
-  zip
-  nil
-  neovim
   lunarvim
-  alejandra
-  android-tools
+  neovim
+  nil
+
+  # Build tools and compilers
+  gcc
   jdk17
-  just
+
+  # Package managers and development tools
   actionlint
-  nh
+  android-tools
+  pnpm
 
-  # Encryption and security tools
-  _1password-cli
-  age
-  gnupg
-  libfido2
-  sops
-
-  # Cloud-related tools and SDKs
+  # Cloud and Infrastructure tools
+  docker-compose
+  doppler
   flyctl
-
   go
   gopls
   ngrok
@@ -51,34 +27,76 @@ with pkgs; [
   terraform-ls
   tflint
 
-  # Media-related packages
-  imagemagick
-  ffmpeg
+  # Version Control and Source Management
+  gh
+  git-filter-repo
+
+  # Security and Encryption
+  _1password-cli
+  age
+  gnupg
+  libfido2
+  sops
+
+  # System utilities
+  alejandra
+  btop
+  coreutils
+  du-dust
+  eza
+  htop
+  iftop
+  just
+  killall
+  neofetch
+  nh
+  tmux
+  tree
+  wget
+
+  # Text processing and search
+  act
+  aspell
+  aspellDicts.en
+  bat
+  difftastic
   fd
-  font-awesome
+  fzf
   glow
+  hunspell
+  jq
+  pandoc
+  ripgrep
+
+  # Media processing
+  ffmpeg
+  imagemagick
   jpegoptim
   pngquant
-  eza
 
-  # Node.js development tools
-  fzf
+  # Fonts and UI
+  font-awesome
+  nerd-fonts.jetbrains-mono
 
-  # Source code management, Git, GitHub tools
-  gh
-  # Text and terminal utilities
-  htop
-  hunspell
-  iftop
-  jq
-  ripgrep
-  tree
-  tmux
+  # Archive management
   unrar
   unzip
+  zip
 
-  # Python packages
-  black
+  # Programming languages and runtimes
   python3
   python3Packages.virtualenv
+  ruby
+
+  # Databases
+  sqlite
+
+  # Mobile Development
+  fastlane
+
+  # Network tools
+  openssh
+
+  # Code formatting
+  black
 ]

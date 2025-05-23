@@ -6,8 +6,4 @@ in
   ++ [
     dockutil
     cocoapods
-    doppler
-    fastlane
-    nerd-fonts.jetbrains-mono
-    gnupg
   ]
