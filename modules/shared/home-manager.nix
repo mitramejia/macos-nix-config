@@ -54,7 +54,7 @@ in {
 
     oh-my-zsh = {
       enable = true;
-      plugins = ["node" "you-should-use" "git" "aws" "z" "vi-mode" "aliases" "tmux" "yarn" "nvm" "jenv" "macos"];
+      plugins = ["node" "git" "aws" "z" "vi-mode" "aliases" "tmux" "yarn" "nvm" "jenv" "macos"];
       theme = ""; # disable theme to allow nix/home-manager starship to control prompt
       extraConfig = ''
         ZSH_TMUX_AUTOSTART=true
