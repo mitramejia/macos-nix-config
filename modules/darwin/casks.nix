@@ -1,20 +1,26 @@
 _: [
   # Development Tools
   "homebrew/cask/docker"
-
-  "insomnia"
   "visual-studio-code"
   "jetbrains-toolbox"
+  "insomnia"
   "figma"
+
+  # Project Management & Team Collaboration
+  "linear-linear"
+  "notion"
+  "notion-calendar"
   "twingate"
 
+  # Communication
+  "discord"
   #  "slack"
   "whatsapp"
 
-  # Utility Tools
+  # Note Taking & Knowledge Management
   "obsidian"
 
-  # Productivity Tools
+  # Productivity & Utility
   "raycast"
 
   # Browsers
