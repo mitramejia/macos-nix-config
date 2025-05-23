@@ -3,13 +3,11 @@ _: [
   "homebrew/cask/docker"
 
   "insomnia"
-  "tableplus"
   "visual-studio-code"
   "jetbrains-toolbox"
   "figma"
+  "twingate"
 
-  # Communication Tools
-  "loom"
   #  "slack"
   "whatsapp"
 
@@ -21,5 +19,4 @@ _: [
 
   # Browsers
   "google-chrome"
-  "firefox"
 ]
