@@ -17,6 +17,7 @@ with pkgs; [
   neofetch
   openssh
   pandoc
+  docker-compose
   sqlite
   ruby
   pnpm
@@ -27,7 +28,7 @@ with pkgs; [
   lunarvim
   alejandra
   android-tools
-  openjdk
+  jdk17
   just
   actionlint
   nh
