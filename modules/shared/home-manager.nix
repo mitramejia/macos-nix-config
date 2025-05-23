@@ -54,7 +54,7 @@ in {
 
     oh-my-zsh = {
       enable = true;
-      plugins = ["node" "git" "aws" "z" "vi-mode" "aliases" "tmux"];
+      plugins = ["node" "you-should-use" "git" "aws" "z" "vi-mode" "aliases" "tmux" "yarn" "nvm" "jenv" "macos"];
       theme = ""; # disable theme to allow nix/home-manager starship to control prompt
       extraConfig = ''
         ZSH_TMUX_AUTOSTART=true
@@ -89,6 +89,8 @@ in {
       export ALTERNATE_EDITOR=""
       export EDITOR="vim"
 
+        export PATH="$HOME/.jenv/bin:$PATH"
+        eval "$(jenv init -)"
     '';
     initExtra = ''
       [ -s "/Users/mitramejia/.scm_breeze/scm_breeze.sh" ] && source "/Users/mitramejia/.scm_breeze/scm_breeze.sh"
@@ -106,6 +108,8 @@ in {
       gplo = "git pull origin";
       open-pr = "gh pr create";
       p = "pnpm";
+      pa = "pnpm add";
+      y = "yarn";
       vim = "lvim";
     };
   };
