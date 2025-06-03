@@ -67,15 +67,14 @@ in {
     {path = "/Applications/Notes.app/";}
     {path = "/Applications/WhatsApp.app/";}
     {path = "/Applications/Obsidian.app/";}
+    {path = "/Applications/Notion.app/";}
+    {path = "/Applications/Notion\ Calendar.app/";}
     {path = "/Users/mitramejia/Applications/WebStorm.app";}
-    {path = "/Users/mitramejia/Applications/DataGrip.app";}
+    {path = "/Users/mitramejia/Applications/PyCharm.app";}
     {path = "/Users/mitramejia/Applications/Android\ Studio.app/";}
     {path = "/Applications/Music.app/";}
-    {path = "/Applications/Photos.app/";}
-    {path = "/Applications/Safari.app/";}
-    {path = "/Applications/Arro\ Staging.app/";}
-    {path = "/Applications/Arro\ Beta.app/";}
-    {path = "/Applications/Arro.app/";}
+    {path = "/Applications/Linear.app/";}
+    {path = "/Applications/Brave\ Browser.app/";}
     {path = "/Applications/iPhone\ Mirroring.app/";}
     {path = "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/";}
     {
