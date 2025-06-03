@@ -10,7 +10,6 @@ _: [
 
   # Project Management & Collaboration
   "linear-linear"
-  "notion"
   "notion-calendar"
   "twingate"
 
