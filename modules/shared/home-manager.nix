@@ -80,6 +80,9 @@ in {
 
       export PNPM_HOME=~/.pnpm-packages
 
+      export PATH="$HOME/.local/bin:$HOME/.pyenv/versions/3.12.7/bin/:$PATH"
+
+      export PATH="$PATH:/Users/mitramejia/.cache/lm-studio/bin"
 
       # Remove history data we don't want to see
       export HISTIGNORE="pwd:ls:cd"
