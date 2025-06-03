@@ -6,4 +6,14 @@ in
   ++ [
     dockutil
     cocoapods
+    # Backend dependencies for Comun
+    pyenv
+    poetry
+    gnupg
+    postgresql
+    openssl
+    readline
+    sqlite
+    xz
+    zlib
   ]
