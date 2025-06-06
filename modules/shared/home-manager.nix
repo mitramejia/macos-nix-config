@@ -60,7 +60,7 @@ in {
         ZSH_TMUX_AUTOSTART=true
       '';
     };
-    initExtraFirst = ''
+    initContent = lib.mkBefore ''
       if [[ -f /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh ]]; then
         . /nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh
         . /nix/var/nix/profiles/default/etc/profile.d/nix.sh
@@ -94,8 +94,7 @@ in {
 
         export PATH="$HOME/.jenv/bin:$PATH"
         eval "$(jenv init -)"
-    '';
-    initExtra = ''
+
       [ -s "/Users/mitramejia/.scm_breeze/scm_breeze.sh" ] && source "/Users/mitramejia/.scm_breeze/scm_breeze.sh"
     '';
     shellAliases = {

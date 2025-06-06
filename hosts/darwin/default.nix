@@ -10,19 +10,16 @@ in {
     ../../modules/shared
   ];
 
-  services.nix-daemon.enable = true;
-
   nix = {
+    enable = true;
     package = pkgs.nix;
 
     settings = {
       trusted-users = ["@admin" "${user}"];
       substituters = ["https://nix-community.cachix.org" "https://cache.nixos.org"];
-      trusted-public-keys = ["cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="];
     };
 
     gc = {
-      user = "root";
       automatic = true;
       interval = {
         Weekday = 0;
@@ -38,9 +35,9 @@ in {
     '';
   };
 
-  system.checks.verifyNixPath = false;
-
   system = {
+    checks.verifyNixPath = false;
+    primaryUser = "mitramejia";
     stateVersion = 4;
 
     defaults = {
