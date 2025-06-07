@@ -26,9 +26,10 @@ logs
 
 # Skip build output
 dist/
+
 build/
 coverage/
 
 # Ignore Nix environment files
 .nix-*
-result/
+result
