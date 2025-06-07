@@ -10,8 +10,8 @@ in {
     ../../modules/shared
   ];
 
+  nix.enable = false; # Required to use nix determinate system and flakes
   nix = {
-    enable = true;
     package = pkgs.nix;
 
     settings = {
@@ -20,7 +20,6 @@ in {
     };
 
     gc = {
-      automatic = true;
       interval = {
         Weekday = 0;
         Hour = 2;
