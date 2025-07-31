@@ -36,7 +36,7 @@
     nixpkgs,
   } @ inputs: let
     username = "mitramejia";
-    hostname = "Mitras-MacBook";
+    hostname = "MitraMacBook";
     darwinSystems = ["aarch64-darwin" "x86_64-darwin"];
     forAllSystems = f: nixpkgs.lib.genAttrs darwinSystems f;
     userEmail = "mitra.mejia@gmail.com";
