@@ -151,6 +151,7 @@
             la = "eza -lah --icons --grid --group-directories-first";
             ".." = "cd ..";
             gp = "git push origin";
+            gpf = "git push --force-with-lease origin";
             gash = "git stash";
             gasha = "git stash apply";
             gplo = "git pull origin";
@@ -182,21 +183,33 @@
             set -g pane-base-index 1
             set-window-option -g pane-base-index 1
 
-            # keybindings
-            bind-key -T copy-mode-vi v send-keys -X begin-selection
-            bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-            bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+                  # Window title configuration
+                  set-option -g set-titles on
+                  set-option -g set-titles-string "#T"
+                  set-option -g automatic-rename on
 
-            unbind -
-            unbind |
+                   # Set window name to current directory name
+                    set-option -g automatic-rename-format '#{b:pane_current_path}'
 
-            bind-key - split-window -v -c "#{pane_current_path}"
-            bind-key | split-window -h -c "#{pane_current_path}"
+                  # Window and pane management
+                  set -g renumber-windows on
 
-            bind-key h select-pane -L
-            bind-key j select-pane -D
-            bind-key k select-pane -U
-            bind-key l select-pane -R
+
+                        # keybindings
+                        bind-key -T copy-mode-vi v send-keys -X begin-selection
+                        bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+                        bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+
+                        unbind -
+                        unbind |
+
+                        bind-key - split-window -v -c "#{pane_current_path}"
+                        bind-key | split-window -h -c "#{pane_current_path}"
+
+                        bind-key h select-pane -L
+                        bind-key j select-pane -D
+                        bind-key k select-pane -U
+                        bind-key l select-pane -R
           '';
 
           plugins = with pkgs; [
@@ -218,6 +231,8 @@
             }
             tmuxPlugins.better-mouse-mode
             tmuxPlugins.yank
+            tmuxPlugins.open
+            tmuxPlugins.copycat
           ];
         };
 
