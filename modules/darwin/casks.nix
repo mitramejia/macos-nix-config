@@ -1,6 +1,5 @@
 _: [
   # Development Tools & IDEs
-  "homebrew/cask/docker"
   "visual-studio-code"
   "jetbrains-toolbox"
   "insomnia"
