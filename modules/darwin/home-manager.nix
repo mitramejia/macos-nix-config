@@ -103,7 +103,7 @@
             plugins = ["node" "git" "aws" "z" "vi-mode" "aliases" "tmux" "yarn" "nvm" "jenv" "macos"];
             theme = ""; # disable theme to allow nix/home-manager starship to control prompt
             extraConfig = ''
-              ZSH_TMUX_AUTOSTART=true
+              DISABLE_AUTO_TITLE=true
             '';
           };
           initContent = lib.mkBefore ''
@@ -175,41 +175,25 @@
           newSession = true;
           mouse = true;
           baseIndex = 1;
+          focusEvents = true;
           disableConfirmationPrompt = true;
           prefix = "C-Space";
           extraConfig = ''
-            set -gu default-command
-            set -g default-shell "$SHELL"
             set -g pane-base-index 1
             set-window-option -g pane-base-index 1
 
-                  # Window title configuration
-                  set-option -g set-titles on
-                  set-option -g set-titles-string "#T"
-                  set-option -g automatic-rename on
+            # keybindings
+            bind-key -T copy-mode-vi v send-keys -X begin-selection
+            bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+            bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
-                   # Set window name to current directory name
-                    set-option -g automatic-rename-format '#{b:pane_current_path}'
+            bind - split-window -v -c "#{pane_current_path}"
+            bind | split-window -h -c "#{pane_current_path}"
 
-                  # Window and pane management
-                  set -g renumber-windows on
-
-
-                        # keybindings
-                        bind-key -T copy-mode-vi v send-keys -X begin-selection
-                        bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-                        bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
-
-                        unbind -
-                        unbind |
-
-                        bind-key - split-window -v -c "#{pane_current_path}"
-                        bind-key | split-window -h -c "#{pane_current_path}"
-
-                        bind-key h select-pane -L
-                        bind-key j select-pane -D
-                        bind-key k select-pane -U
-                        bind-key l select-pane -R
+            bind h select-pane -L
+            bind j select-pane -D
+            bind k select-pane -U
+            bind l select-pane -R
           '';
 
           plugins = with pkgs; [
@@ -217,6 +201,12 @@
               plugin = tmuxPlugins.catppuccin;
               extraConfig = ''
                 set -g @catppuccin_flavour 'mocha'
+                set -g @catppuccin_window_status_style "rounded"
+                set -g status-right-length 100
+                set -g status-left-length 100
+                set -g status-left ""
+                set -g status-right "#{E:@catppuccin_status_application}"
+                set -ag status-right "#{E:@catppuccin_status_session}"
                 set -g @catppuccin_window_tabs_enabled on
                 set -g @catppuccin_date_time "%H:%M"
               '';
