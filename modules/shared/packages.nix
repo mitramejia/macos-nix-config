@@ -84,7 +84,7 @@ with pkgs; [
   zip
 
   # Programming languages and runtimes
-  python3
+  python311
   python3Packages.virtualenv
   ruby
 
