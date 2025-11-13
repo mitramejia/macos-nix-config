@@ -41,7 +41,9 @@
     forAllSystems = f: nixpkgs.lib.genAttrs darwinSystems f;
     userEmail = "mitra.mejia@gmail.com";
 
+
     devShell = system: let
+
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       default = with pkgs;

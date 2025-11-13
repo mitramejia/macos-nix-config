@@ -404,7 +404,7 @@
     {path = "/Users/mitramejia/Applications/Android\ Studio.app/";}
     {path = "/Applications/Music.app/";}
     {path = "/Applications/Linear.app/";}
-    {path = "/Applications/Brave\ Browser.app/";}
+    {path = "/Applications/Arc.app/";}
     {path = "/Applications/iPhone\ Mirroring.app/";}
     {path = "/Applications/Xcode.app/Contents/Developer/Applications/Simulator.app/";}
     {

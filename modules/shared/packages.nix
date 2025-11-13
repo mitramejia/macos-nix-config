@@ -1,10 +1,12 @@
-{pkgs, ...}:
+{ pkgs, ... }:
 with pkgs; [
+
   # Development environments and IDEs
   devenv
   lunarvim
   neovim
   nil
+
 
   # Build tools and compilers
   gcc
@@ -67,8 +69,9 @@ with pkgs; [
   jq
   pandoc
   ripgrep
-
+  nixd
   # Media processing
+
   ffmpeg
   imagemagick
   jpegoptim

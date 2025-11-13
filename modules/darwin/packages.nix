@@ -16,4 +16,5 @@ in
     sqlite
     xz
     zlib
+    idb-companion
   ]
