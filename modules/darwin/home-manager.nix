@@ -375,14 +375,8 @@
             "github.com" = {
               identitiesOnly = true;
               identityFile = [
-                (
-                  lib.mkIf pkgs.stdenv.hostPlatform.isLinux
                   "~/.ssh/github_id"
-                )
-                (
-                  lib.mkIf pkgs.stdenv.hostPlatform.isDarwin
-                  "~/.ssh/github_id"
-                )
+                  "~/.ssh/comun_github_id"
               ];
             };
           };
