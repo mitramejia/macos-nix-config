@@ -3,7 +3,7 @@
 
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-25.05";
-      home-manager.url = "github:nix-community/home-manager/release-25.05";
+    home-manager.url = "github:nix-community/home-manager/release-25.05";
     darwin = {
       url = "github:nix-darwin/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -41,9 +41,7 @@
     forAllSystems = f: nixpkgs.lib.genAttrs darwinSystems f;
     userEmail = "mitra.mejia@gmail.com";
 
-
     devShell = system: let
-
       pkgs = nixpkgs.legacyPackages.${system};
     in {
       default = with pkgs;

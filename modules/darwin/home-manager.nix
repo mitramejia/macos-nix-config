@@ -107,10 +107,15 @@
 
             export PATH="$HOME/.local/bin:$HOME/.pyenv/versions/3.12.7/bin/:$PATH"
 
+
+            export PATH="$HOME/.local/bin:$HOME/.pyenv/versions/3.12.7/bin/:$PATH"
+
             export PATH="$PATH:/Users/mitramejia/.cache/lm-studio/bin"
 
             # Remove history data we don't want to see
             export HISTIGNORE="pwd:ls:cd"
+
+
 
 
             # Vim is my editor
@@ -145,6 +150,48 @@
           };
         };
 
+        yazi = {
+          enable = true;
+          settings = {
+            yazi = {
+              ratio = [
+                1
+                4
+                3
+              ];
+              sort_by = "natural";
+              sort_sensitive = true;
+              sort_reverse = false;
+              sort_dir_first = true;
+              linemode = "none";
+              show_hidden = true;
+              show_symlink = true;
+            };
+
+            preview = {
+              image_filter = "lanczos3";
+              image_quality = 90;
+              tab_size = 1;
+              max_width = 600;
+              max_height = 900;
+              cache_dir = "";
+              ueberzug_scale = 1;
+              ueberzug_offset = [
+                0
+                0
+                0
+                0
+              ];
+            };
+
+            tasks = {
+              micro_workers = 5;
+              macro_workers = 10;
+              bizarre_retry = 5;
+            };
+          };
+        };
+
         tmux = {
           enable = true;
           shell = "${pkgs.zsh}/bin/zsh";
@@ -160,35 +207,44 @@
           aggressiveResize = true;
           escapeTime = 0;
           extraConfig = ''
-               set-window-option -g pane-base-index 1
+                     set-window-option -g pane-base-index 1
 
-               # truecolor (RGB) support with tmux-256color
-               set -ga terminal-overrides ",tmux-256color:RGB"
+                     # truecolor (RGB) support with tmux-256color
+                     set -ga terminal-overrides ",tmux-256color:RGB"
 
-               # keybindings
-               bind-key -T copy-mode-vi v send-keys -X begin-selection
-               bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
-               bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
+                     # keybindings
+                     bind-key -T copy-mode-vi v send-keys -X begin-selection
+                     bind-key -T copy-mode-vi C-v send-keys -X rectangle-toggle
+                     bind-key -T copy-mode-vi y send-keys -X copy-selection-and-cancel
 
-               bind - split-window -v -c "#{pane_current_path}"
-               bind | split-window -h -c "#{pane_current_path}"
+                     bind - split-window -v -c "#{pane_current_path}"
+                     bind | split-window -h -c "#{pane_current_path}"
 
-               bind h select-pane -L
-               bind j select-pane -D
-               bind k select-pane -U
-               bind l select-pane -R
+                     bind h select-pane -L
+                     bind j select-pane -D
+                     bind k select-pane -U
+                     bind l select-pane -R
 
-               # reload tmux configuration
-               bind r source-file ~/.config/tmux/tmux.conf \; display-message "Tmux config reloaded"
+                     # reload tmux configuration
+                     bind r source-file ~/.config/tmux/tmux.conf \; display-message "Tmux config reloaded"
 
-            # renumber when window is closed
-            set -g renumber-windows on
-            # set left and right status bar
-            set -g allow-rename off
-            set -g status-position bottom
-            set -g status-interval 5
-            set -g status-left-length 100
-            set -g status-right-length 100
+                  # renumber when window is closed
+                  set -g renumber-windows on
+                  # set left and right status bar
+                  set -g allow-rename on
+                  set -g automatic-rename on
+                  # Show path when idle in a shell; otherwise show the active command.
+                  set -g automatic-rename-format "#{?#{m:^(zsh|bash|fish|nu)$,#{pane_current_command}},#{b:pane_current_path},#{pane_current_command}}"
+                  set -g status-position bottom
+                  set -g status-interval 5
+                  set -g status-left-length 100
+                  set -g status-right-length 100
+                  set -g set-clipboard on
+
+                  # For Yazi image previews (allow passthrough)
+            set -g allow-passthrough on
+            set -ga update-environment TERM
+            set -ga update-environment TERM_PROGRAM
           '';
 
           plugins = with pkgs; [
@@ -200,9 +256,9 @@
                 set -g @catppuccin_window_status_style 'rounded'
                 set -g @catppuccin_window_number_position 'right'
                 set -g @catppuccin_window_status 'no'
-                set -g @catppuccin_window_current_text " #{b:pane_current_path}"
-                set -g @catppuccin_window_default_text " #{b:pane_current_path}"
-                set -g @catppuccin_window_text " #{b:pane_current_path}"
+                set -g @catppuccin_window_current_text " #{window_name}"
+                set -g @catppuccin_window_default_text " #{window_name}"
+                set -g @catppuccin_window_text " #{window_name}"
                 set -g @catppuccin_window_current_fill 'number'
                 set -g @catppuccin_window_current_color '#{E:@thm_surface_2}'
                 set -g @catppuccin_date_time_text '%d.%m. %H:%M'
@@ -375,8 +431,8 @@
             "github.com" = {
               identitiesOnly = true;
               identityFile = [
-                  "~/.ssh/github_id"
-                  "~/.ssh/comun_github_id"
+                "~/.ssh/github_id"
+                "~/.ssh/comun_github_id"
               ];
             };
           };

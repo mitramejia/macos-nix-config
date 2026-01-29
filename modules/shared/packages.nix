@@ -1,12 +1,10 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 with pkgs; [
-
   # Development environments and IDEs
   devenv
   lunarvim
   neovim
   nil
-
 
   # Build tools and compilers
   gcc
@@ -16,6 +14,8 @@ with pkgs; [
   actionlint
   android-tools
   pnpm
+  uv
+  zoxide
 
   # Cloud and Infrastructure tools
   docker-compose
