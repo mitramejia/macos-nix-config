@@ -125,7 +125,6 @@
               export PATH="$HOME/.jenv/bin:$PATH"
               eval "$(jenv init -)"
 
-            [ -s "/Users/mitramejia/.scm_breeze/scm_breeze.sh" ] && source "/Users/mitramejia/.scm_breeze/scm_breeze.sh"
           '';
           shellAliases = {
             v = "lvim";
@@ -190,6 +189,12 @@
               bizarre_retry = 5;
             };
           };
+        };
+
+        scmpuff = {
+          enable = true;
+          enableAliases = true;
+          enableZshIntegration = true;
         };
 
         tmux = {
