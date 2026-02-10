@@ -2,8 +2,6 @@
 with pkgs; [
   # Development environments and IDEs
   devenv
-  lunarvim
-  neovim
   nil
 
   # Build tools and compilers
@@ -13,7 +11,6 @@ with pkgs; [
   # Package managers and development tools
   actionlint
   android-tools
-  pnpm
   uv
   zoxide
 
@@ -44,7 +41,7 @@ with pkgs; [
   alejandra
   btop
   coreutils
-  du-dust
+  dust
   eza
   htop
   iftop
@@ -55,6 +52,8 @@ with pkgs; [
   tmux
   tree
   wget
+  sapling
+  lazygit
 
   # Text processing and search
   act
