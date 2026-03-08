@@ -107,7 +107,7 @@
 
           oh-my-zsh = {
             enable = true;
-            plugins = ["node" "git" "aws" "z" "vi-mode" "aliases" "yarn" "nvm" "jenv" "macos"];
+            plugins = ["git" "z" "vi-mode" "aliases" "yarn" "macos"];
             theme = ""; # disable theme to allow nix/home-manager starship to control prompt
             extraConfig = ''
               DISABLE_AUTO_TITLE=true
@@ -138,8 +138,6 @@
 
             export PATH="$HOME/.local/bin:$HOME/.pyenv/versions/3.12.7/bin/:$PATH"
 
-            export PATH="$PATH:/Users/mitramejia/.cache/lm-studio/bin"
-
             # Remove history data we don't want to see
             export HISTIGNORE="pwd:ls:cd"
 
@@ -149,16 +147,9 @@
               rm -f "$tmux_sock"
             fi
 
-
-
-
             # Vim is my editor
             export ALTERNATE_EDITOR=""
             export EDITOR="vim"
-
-              export PATH="$HOME/.jenv/bin:$PATH"
-              eval "$(jenv init -)"
-
           '';
           shellAliases = {
             v = "nvim";
