@@ -423,6 +423,13 @@
               theme = "dashboard";
             };
 
+            opencode = {
+              enable = true;
+              settings = {
+                auto_reload = true;
+              };
+            };
+
             gitsigns.enable = true;
             diffview.enable = true;
 
@@ -541,6 +548,10 @@
               };
             };
           };
+
+          extraPlugins = with pkgs.vimPlugins; [
+            snacks-nvim
+          ];
 
           keymaps = [
             {
@@ -719,6 +730,56 @@
               action = "<cmd>Telescope commands<CR>";
               options.desc = "Run command";
             }
+            {
+              key = "<leader>oa";
+              mode = ["n" "x"];
+              action.__raw = ''
+                function()
+                  require("opencode").ask("@this: ", { submit = true })
+                end
+              '';
+              options.desc = "Ask opencode";
+            }
+            {
+              key = "<leader>os";
+              mode = ["n" "x"];
+              action.__raw = ''
+                function()
+                  require("opencode").select()
+                end
+              '';
+              options.desc = "Opencode palette";
+            }
+            {
+              key = "<leader>ot";
+              mode = ["n" "t"];
+              action.__raw = ''
+                function()
+                  require("opencode").toggle()
+                end
+              '';
+              options.desc = "Toggle opencode";
+            }
+            {
+              key = "<leader>oe";
+              mode = ["n" "x"];
+              action.__raw = ''
+                function()
+                  require("opencode").prompt("explain")
+                end
+              '';
+              options.desc = "Explain with opencode";
+            }
+            {
+              key = "<leader>of";
+              mode = ["n" "x"];
+              action.__raw = ''
+                function()
+                  require("opencode").prompt("fix")
+                end
+              '';
+              options.desc = "Fix with opencode";
+            }
 
             {
               key = "<leader>gf";
@@ -866,6 +927,7 @@
               fd
               bat
               lazygit
+              opencode
               nil
               nodePackages.typescript-language-server
               nodePackages.typescript
@@ -926,6 +988,44 @@
               vim.notify = notify
             end
 
+            local ok_snacks, snacks = pcall(require, "snacks")
+            if ok_snacks then
+              snacks.setup({
+                input = {
+                  enabled = true,
+                },
+                picker = {
+                  enabled = true,
+                  actions = {
+                    opencode_send = function(...)
+                      return require("opencode").snacks_picker_send(...)
+                    end,
+                  },
+                  win = {
+                    input = {
+                      keys = {
+                        ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
+                      },
+                    },
+                  },
+                },
+                terminal = {
+                  enabled = true,
+                },
+              })
+
+              local ok_opencode_config, opencode_config = pcall(require, "opencode.config")
+              if ok_opencode_config then
+                -- Use a stable port and the wrapped Nix binary so opencode.nvim can
+                -- probe the server directly instead of racing `lsof` discovery.
+                local opencode_port = 4096
+                opencode_config.opts.port = opencode_port
+                if opencode_config.provider then
+                  opencode_config.provider.cmd = "${lib.getExe pkgs.opencode} --port " .. opencode_port
+                end
+              end
+            end
+
             local ok_wk, wk = pcall(require, "which-key")
             if ok_wk then
               wk.add({
@@ -935,6 +1035,7 @@
                 { "<leader>g", group = "Git" },
                 { "<leader>gh", group = "Git Hunks" },
                 { "<leader>gt", group = "Git Toggles" },
+                { "<leader>o", group = "Opencode" },
                 { "<leader>w", group = "Windows" },
               })
             end
