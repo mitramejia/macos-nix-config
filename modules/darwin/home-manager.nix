@@ -371,6 +371,7 @@
             smartcase = true;
             incsearch = true;
             hlsearch = true;
+            autoread = true;
             showmode = true;
             showcmd = true;
             guifont = "JetBrainsMono Nerd Font Mono:h14";
