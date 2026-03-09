@@ -55,6 +55,19 @@
         packages = pkgs.callPackage ./packages.nix {};
         stateVersion = "23.11";
       };
+
+      home.activation.linkOpencodeSkills = lib.hm.dag.entryAfter ["writeBoundary"] ''
+        skills_source="$HOME/.codex/skills"
+        skills_target="$HOME/.config/opencode/skills"
+
+        mkdir -p "$(dirname "$skills_target")"
+
+        if [[ -d "$skills_source" ]]; then
+          rm -rf "$skills_target"
+          ln -s "$skills_source" "$skills_target"
+        fi
+      '';
+
       programs = {
         direnv = {
           enable = true;
@@ -220,6 +233,38 @@
           enable = true;
           enableAliases = true;
           enableZshIntegration = true;
+        };
+
+        mcp = {
+          servers = {
+            linear = {
+              type = "remote";
+              url = "https://mcp.linear.app/mcp";
+              enabled = true;
+            };
+            github = {
+              type = "remote";
+              url = "https://api.githubcopilot.com/mcp/";
+              enabled = true;
+              oauth = false;
+              headers = {
+                Authorization = "Bearer {env:GITHUB_PAT_TOKEN}";
+              };
+            };
+            "datadog-mcp" = {
+              type = "remote";
+              url = "https://mcp.datadoghq.com/api/unstable/mcp-server/mcp";
+              enabled = true;
+            };
+          };
+        };
+
+        opencode = {
+          enable = true;
+          enableMcpIntegration = true;
+          settings = {
+            model = "gpt-5.4";
+          };
         };
 
         tmux = {
@@ -422,13 +467,6 @@
             alpha = {
               enable = true;
               theme = "dashboard";
-            };
-
-            opencode = {
-              enable = true;
-              settings = {
-                auto_reload = true;
-              };
             };
 
             gitsigns.enable = true;
@@ -636,6 +674,30 @@
               action = "<C-w>l";
               options.desc = "Pane right";
             }
+            {
+              key = "<C-h>";
+              mode = ["t"];
+              action = "<C-\\><C-n><Cmd>TmuxNavigateLeft<CR>";
+              options.desc = "Tmux navigate left (terminal)";
+            }
+            {
+              key = "<C-j>";
+              mode = ["t"];
+              action = "<C-\\><C-n><Cmd>TmuxNavigateDown<CR>";
+              options.desc = "Tmux navigate down (terminal)";
+            }
+            {
+              key = "<C-k>";
+              mode = ["t"];
+              action = "<C-\\><C-n><Cmd>TmuxNavigateUp<CR>";
+              options.desc = "Tmux navigate up (terminal)";
+            }
+            {
+              key = "<C-l>";
+              mode = ["t"];
+              action = "<C-\\><C-n><Cmd>TmuxNavigateRight<CR>";
+              options.desc = "Tmux navigate right (terminal)";
+            }
 
             {
               key = "<leader>wv";
@@ -731,57 +793,6 @@
               action = "<cmd>Telescope commands<CR>";
               options.desc = "Run command";
             }
-            {
-              key = "<leader>oa";
-              mode = ["n" "x"];
-              action.__raw = ''
-                function()
-                  require("opencode").ask("@this: ", { submit = true })
-                end
-              '';
-              options.desc = "Ask opencode";
-            }
-            {
-              key = "<leader>os";
-              mode = ["n" "x"];
-              action.__raw = ''
-                function()
-                  require("opencode").select()
-                end
-              '';
-              options.desc = "Opencode palette";
-            }
-            {
-              key = "<leader>ot";
-              mode = ["n" "t"];
-              action.__raw = ''
-                function()
-                  require("opencode").toggle()
-                end
-              '';
-              options.desc = "Toggle opencode";
-            }
-            {
-              key = "<leader>oe";
-              mode = ["n" "x"];
-              action.__raw = ''
-                function()
-                  require("opencode").prompt("explain")
-                end
-              '';
-              options.desc = "Explain with opencode";
-            }
-            {
-              key = "<leader>of";
-              mode = ["n" "x"];
-              action.__raw = ''
-                function()
-                  require("opencode").prompt("fix")
-                end
-              '';
-              options.desc = "Fix with opencode";
-            }
-
             {
               key = "<leader>gf";
               mode = ["n"];
@@ -928,7 +939,6 @@
               fd
               bat
               lazygit
-              opencode
               nil
               nodePackages.typescript-language-server
               nodePackages.typescript
@@ -997,34 +1007,11 @@
                 },
                 picker = {
                   enabled = true,
-                  actions = {
-                    opencode_send = function(...)
-                      return require("opencode").snacks_picker_send(...)
-                    end,
-                  },
-                  win = {
-                    input = {
-                      keys = {
-                        ["<a-a>"] = { "opencode_send", mode = { "n", "i" } },
-                      },
-                    },
-                  },
                 },
                 terminal = {
                   enabled = true,
                 },
               })
-
-              local ok_opencode_config, opencode_config = pcall(require, "opencode.config")
-              if ok_opencode_config then
-                -- Use a stable port and the wrapped Nix binary so opencode.nvim can
-                -- probe the server directly instead of racing `lsof` discovery.
-                local opencode_port = 4096
-                opencode_config.opts.port = opencode_port
-                if opencode_config.provider then
-                  opencode_config.provider.cmd = "${lib.getExe pkgs.opencode} --port " .. opencode_port
-                end
-              end
             end
 
             local ok_wk, wk = pcall(require, "which-key")
@@ -1036,7 +1023,6 @@
                 { "<leader>g", group = "Git" },
                 { "<leader>gh", group = "Git Hunks" },
                 { "<leader>gt", group = "Git Toggles" },
-                { "<leader>o", group = "Opencode" },
                 { "<leader>w", group = "Windows" },
               })
             end
