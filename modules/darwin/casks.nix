@@ -21,6 +21,7 @@ _: [
   "obsidian"
 
   # Productivity & Utilities
+  "iterm2"
   "raycast"
 
   # Web Browsers

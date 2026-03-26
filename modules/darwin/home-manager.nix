@@ -1122,7 +1122,7 @@
     {path = "/Applications/1Password.app/";}
     {path = "/Applications/Messages.app/";}
     {path = "/Applications/Facetime.app/";}
-    {path = "${pkgs.ghostty-bin}/Applications/Ghostty.app";}
+    {path = "/Applications/iTerm.app/";}
     {path = "/Applications/Notes.app/";}
     {path = "/Applications/WhatsApp.app/";}
     {path = "/Applications/Obsidian.app/";}
