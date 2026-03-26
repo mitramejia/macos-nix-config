@@ -47,7 +47,6 @@ with pkgs; [
   eza
   htop
   iftop
-  just
   killall
   neofetch
   nh
