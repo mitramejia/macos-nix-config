@@ -27,6 +27,9 @@
       url = "github:homebrew/homebrew-cask";
       flake = false;
     };
+    claude-code = {
+      url = "github:sadjow/claude-code-nix";
+    };
   };
 
   outputs = {
@@ -39,6 +42,7 @@
     home-manager,
     nixvim,
     nixpkgs,
+    claude-code,
   } @ inputs: let
     username = "mitramejia";
     hostname = "MitraMacBook";
@@ -91,6 +95,9 @@
         modules = [
           home-manager.darwinModules.home-manager
           nix-homebrew.darwinModules.nix-homebrew
+          {
+            nixpkgs.overlays = [claude-code.overlays.default];
+          }
           {
             nix-homebrew = {
               user = username;

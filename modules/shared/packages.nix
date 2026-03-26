@@ -1,6 +1,7 @@
 {pkgs, ...}:
 with pkgs; [
   # Development environments and IDEs
+  claude-code
   devenv
   nil
 
