@@ -83,6 +83,9 @@
         starship = {
           enable = true;
           package = pkgs.starship;
+          settings = {
+            command_timeout = 5000;
+          };
         };
 
         ghostty = {
