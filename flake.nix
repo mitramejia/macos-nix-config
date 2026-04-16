@@ -96,7 +96,14 @@
           home-manager.darwinModules.home-manager
           nix-homebrew.darwinModules.nix-homebrew
           {
-            nixpkgs.overlays = [claude-code.overlays.default];
+            nixpkgs.overlays = [
+              claude-code.overlays.default
+              (final: prev: {
+                direnv = prev.direnv.overrideAttrs (old: {
+                  doCheck = false;
+                });
+              })
+            ];
           }
           {
             nix-homebrew = {

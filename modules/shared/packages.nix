@@ -17,7 +17,6 @@ with pkgs; [
   telegram-desktop
 
   # Cloud and Infrastructure tools
-  docker-compose
   doppler
   flyctl
   go
