@@ -3,6 +3,7 @@ _: [
   "visual-studio-code"
   "jetbrains-toolbox"
   "insomnia"
+  "docker-desktop"
 
   # Design & UI/UX
   "figma"
@@ -14,8 +15,7 @@ _: [
 
   # Communication & Messaging
   "discord"
-  #  "slack"
-  "whatsapp"
+  "slack"
 
   # Knowledge Management & Note Taking
   "obsidian"
