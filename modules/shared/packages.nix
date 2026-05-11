@@ -2,6 +2,7 @@
 with pkgs; [
   # Development environments and IDEs
   claude-code
+  codex
   devenv
   nil
 

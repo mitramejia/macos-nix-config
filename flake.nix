@@ -30,6 +30,7 @@
     claude-code = {
       url = "github:sadjow/claude-code-nix";
     };
+    codex-cli-nix.url = "github:sadjow/codex-cli-nix";
   };
 
   outputs = {
@@ -43,6 +44,7 @@
     nixvim,
     nixpkgs,
     claude-code,
+    codex-cli-nix,
   } @ inputs: let
     username = "mitramejia";
     hostname = "MitraMacBook";
@@ -98,6 +100,7 @@
           {
             nixpkgs.overlays = [
               claude-code.overlays.default
+              codex-cli-nix.overlays.default
               (final: prev: {
                 direnv = prev.direnv.overrideAttrs (old: {
                   doCheck = false;
