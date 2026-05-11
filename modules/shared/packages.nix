@@ -14,7 +14,6 @@ with pkgs; [
   android-tools
   uv
   zoxide
-  telegram-desktop
 
   # Cloud and Infrastructure tools
   doppler
