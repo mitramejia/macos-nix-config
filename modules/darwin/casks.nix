@@ -3,7 +3,6 @@ _: [
   "visual-studio-code"
   "jetbrains-toolbox"
   "insomnia"
-  "docker-desktop"
 
   # Design & UI/UX
   "figma"
