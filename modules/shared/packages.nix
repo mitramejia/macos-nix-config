@@ -54,6 +54,7 @@ with pkgs; [
   wget
   sapling
   lazygit
+  yazi
 
   # Text processing and search
   act
@@ -69,8 +70,8 @@ with pkgs; [
   pandoc
   ripgrep
   nixd
-  # Media processing
 
+  # Media processing
   ffmpeg
   imagemagick
   jpegoptim
