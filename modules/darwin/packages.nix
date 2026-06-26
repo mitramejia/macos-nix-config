@@ -1,6 +1,7 @@
 {pkgs}:
 with pkgs; let
   shared-packages = import ../shared/packages.nix {inherit pkgs;};
+  headroomAi = pkgs.callPackage ../../packages/headroom-ai.nix {};
 in
   shared-packages
   ++ [
@@ -16,4 +17,5 @@ in
     xz
     zlib
     idb-companion
+    headroomAi
   ]
