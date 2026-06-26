@@ -74,6 +74,7 @@
       y = "yarn";
       vim = "nvim";
       codex-oss = "codex -p gpt-oss-20b-lmstudio --oss";
+      codex = "headroom wrap codex";
       # Uses nh to manage generations https://github.com/nix-community/nh?tab=readme-ov-file#what-does-it-do
       fr = "nh darwin switch --hostname ${hostname} /Users/${username}/WebstormProjects/nix-config";
       fu = "nh darwin switch --hostname ${hostname} --update /Users/${username}/WebstormProjects/nix-config";
