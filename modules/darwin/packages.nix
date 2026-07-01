@@ -18,5 +18,4 @@ in
     zlib
     idb-companion
     headroomAi
-    rtk
   ]

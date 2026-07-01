@@ -26,6 +26,7 @@ with pkgs; [
   terraform
   terraform-ls
   tflint
+  rtk
 
   # Version Control and Source Management
   gh
@@ -47,7 +48,7 @@ with pkgs; [
   htop
   iftop
   killall
-  neofetch
+  fastfetch
   nh
   tmux
   tree
