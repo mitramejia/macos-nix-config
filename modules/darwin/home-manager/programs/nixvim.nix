@@ -1,10 +1,12 @@
 {
+  inputs,
   pkgs,
   lib,
   ...
 }: {
   programs.nixvim = {
     enable = true;
+    nixpkgs.source = inputs.nixpkgs;
     wrapRc = true;
     defaultEditor = true;
     viAlias = true;
@@ -561,8 +563,8 @@
         bat
         lazygit
         nil
-        nodePackages.typescript-language-server
-        nodePackages.typescript
+        typescript-language-server
+        typescript
         vscode-langservers-extracted
         pyright
         lua-language-server
@@ -571,7 +573,7 @@
         multimarkdown
         clang-tools
         prettierd
-        nodePackages.prettier
+        prettier
         stylua
         shfmt
         alejandra

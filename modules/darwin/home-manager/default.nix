@@ -13,6 +13,7 @@
 
   home-manager = {
     useGlobalPkgs = true;
+    extraSpecialArgs = {inherit inputs;};
     users.${username}.imports = [
       inputs.nixvim.homeModules.nixvim
       ./programs/agents.nix
