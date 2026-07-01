@@ -8,6 +8,7 @@
   python3Packages,
   rustPlatform,
   scc,
+  stdenv,
 }:
 python3Packages.buildPythonApplication rec {
   pname = "headroom-ai";
@@ -100,6 +101,12 @@ python3Packages.buildPythonApplication rec {
     "${onnxruntime}/lib"
   ];
 
+  postFixup = lib.optionalString stdenv.hostPlatform.isDarwin ''
+    for extension in "$out"/lib/python*/site-packages/headroom/_core*.so; do
+      install_name_tool -add_rpath ${lib.makeLibraryPath [onnxruntime]} "$extension"
+    done
+  '';
+
   doCheck = false;
 
   pythonImportsCheck = [
@@ -113,6 +120,6 @@ python3Packages.buildPythonApplication rec {
     homepage = "https://github.com/headroomlabs-ai/headroom";
     license = lib.licenses.asl20;
     mainProgram = "headroom";
-    platforms = lib.platforms.linux;
+    platforms = lib.platforms.linux ++ lib.platforms.darwin;
   };
 }
