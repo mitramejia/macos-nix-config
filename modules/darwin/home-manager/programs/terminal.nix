@@ -49,6 +49,7 @@
 
     yazi = {
       enable = true;
+      shellWrapperName = "yy";
       settings = {
         yazi = {
           ratio = [
